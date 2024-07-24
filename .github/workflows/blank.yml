@@ -16,7 +16,10 @@ jobs:
     steps:
     - name: Check Out
       uses: actions/checkout@main
-      
+
+    - name: Setup Debug Session
+      uses: csexton/debugger-action@master
+
     - name: Prepare the environment
       run: |
         sudo apt update
@@ -28,7 +31,10 @@ jobs:
       run: |
         aria2c "${{ github.event.inputs.IMG_URL }}"
         ls
-      
+        
+    - name: Setup Debug Session
+      uses: csexton/debugger-action@master
+
     - name: Start build
       run: |
         python3 -m twrpdtgen -o dt/ *.img
